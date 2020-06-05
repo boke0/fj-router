@@ -1,0 +1,19 @@
+import resolve from "rollup-plugin-node-resolve";
+import babel from "rollup-plugin-babel";
+
+export default {
+    input: "src/index.js",
+    output: {
+        name: "FjRouter",
+        file: "dist/index.js",
+        format: "iife"
+    },
+    plugins: [
+        resolve({
+            customResolveOptions: {
+                moduleDirectory: "node_modules",
+            }
+        }),
+        babel()
+    ]
+}
