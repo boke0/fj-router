@@ -3356,7 +3356,7 @@ var FjRouter = (function () {
         _initialize2(this);
 
         this.root_node = new Leaf(0, "");
-        this.base = "";
+        window.fj_base_uri = "";
         window.addEventListener("pushstate", () => this.page());
         window.addEventListener("popstate", () => this.page());
         window.addEventListener("replacestate", () => this.page());
@@ -3370,7 +3370,6 @@ var FjRouter = (function () {
         kind: "method",
         key: "setBase",
         value: function setBase(path) {
-          this.base = path;
           window.fj_base_uri = path;
         }
       }, {
@@ -3383,7 +3382,7 @@ var FjRouter = (function () {
         kind: "method",
         key: "page",
         value: function page() {
-          let path = location.pathname.slice(this.base.length);
+          let path = location.pathname.slice(fj_base_uri.length);
           let data = this.route(path);
           var comp = typeof data.component === "function" ? data.component(data.params) : data.component;
           if ("setup" in data) data.setup(comp, data.params);

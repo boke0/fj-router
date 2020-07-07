@@ -99,20 +99,19 @@ class Router extends LitElement {
     constructor() {
         super();
         this.root_node = new Leaf(0, "");
-        this.base = "";
+        window.fj_base_uri = "";
         window.addEventListener("pushstate", ()=>this.page());
         window.addEventListener("popstate", ()=>this.page());
         window.addEventListener("replacestate", ()=>this.page());
     }
     setBase(path){
-        this.base = path;
         window.fj_base_uri = path;
     }
     render(){
         return html`<slot></slot>`;
     }
     page() {
-        let path = location.pathname.slice(this.base.length);
+        let path = location.pathname.slice(fj_base_uri.length);
         let data = this.route(path);
         var comp = typeof data.component === "function"
             ? data.component(data.params)
